@@ -9,33 +9,40 @@ function generateTaskId() {
 }
 
 // Function to create a task card based on task data
+// Function to create a task card element with given properties
 function createTaskCard({ id, title, description, dueDate, status }) {
+  // Create a div element for the task card, add necessary classes and set its data-task-id attribute
   const taskCard = $('<div>').addClass('card w-75 task-card draggable my-3').attr('data-task-id', id);
   const cardHeader = $('<div>').addClass('card-header h4').text(title);
   const cardBody = $('<div>').addClass('card-body');
   const cardText = $('<p>').addClass('card-text').text(description + ' - ' + dueDate);
   const cardDeleteBtn = $('<button>').addClass('btn btn-danger delete').text('Delete').attr('data-task-id', id);
+
   cardDeleteBtn.on('click', handleDeleteTask);
 
   // Set card background color based on due date and status
-  const now = dayjs();
-  const doneDate = dayjs(dueDate);
-  const warningDate = dayjs(dueDate).subtract(3, 'day');
+  const now = dayjs(); // Get the current date
+  const doneDate = dayjs(dueDate); // Convert the due date to a dayjs object
+  const warningDate = dayjs(dueDate).subtract(3, 'day'); // Calculate a warning date 3 days before the due date
 
+  // If the current date is after the warning date and the status is not 'done', add warning styling to the task card
   if (now.isAfter(warningDate) && status != 'done') {
     taskCard.addClass('bg-warning text-white');
   }
+
+  // If the current date is after the due date and the status is not 'done', add overdue styling to the task card
   if (now.isAfter(doneDate) && status != 'done') {
     taskCard.addClass('bg-danger text-white ');
-    cardDeleteBtn.addClass('border-light');
+    cardDeleteBtn.addClass('border-light'); // Add a light border to the delete button for visibility
   }
 
-  // Append card elements
-  cardBody.append(cardText, cardDeleteBtn);
-  taskCard.append(cardHeader, cardBody);
+  // Append card elements to build the task card
+  cardBody.append(cardText, cardDeleteBtn); // Append card text and delete button to the card body
+  taskCard.append(cardHeader, cardBody); // Append card header and body to the task card
 
-  return taskCard;
+  return taskCard; // Return the completed task card element
 }
+
 
 // Function to render task lists in different status lanes
 function renderTaskList() {
@@ -87,6 +94,7 @@ function handleAddTask(event) {
   taskList.push(task);
   localStorage.setItem('tasks', JSON.stringify(taskList));
 
+  // Call render function
   renderTaskList();
 
   // Clear input fields

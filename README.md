@@ -11,8 +11,8 @@
 
 
 ## Links
-* Link to live [personal blog](https://bryanpeens.github.io/personal-blog/index.html)
-* Link to github [repo](https://github.com/BryanPeens/personal-blog)
+* Link to live [task manager](https://bryanpeens.github.io/task-manager/)
+* Link to github [repo](https://github.com/BryanPeens/task-manager)
 
 ## Description
 
