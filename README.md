@@ -49,13 +49,12 @@ THEN the saved tasks persist
 
 The following screenshot shows the application functionality:
 
-![A user adds three tasks to the task board and changes the state of two of them to in progress and then completion. The user then deletes the two cards in the done column.](./Develop//assets/images/screenshot.png)
+![A user adds three tasks to the task board and changes the state of two of them to in progress and then completion. The user then deletes the two cards in the done column.](./assets/images/screenshot.png)
 
 ## Features
 
 ### External Libraries:
 - The document includes links to external libraries such as Bootstrap, Font Awesome, jQuery UI, and Day.js. These libraries are utilized to enhance the functionality and styling of the web application.
-Header Section:
 
 ### Add Task Button:
 

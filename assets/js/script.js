@@ -18,12 +18,16 @@ function createTaskCard({ id, title, description, dueDate, status }) {
   cardDeleteBtn.on('click', handleDeleteTask);
 
   // Set card background color based on due date and status
-  if (dueDate && status !== 'done') {
-    const now = dayjs();
-    const taskDueDate = dayjs(dueDate, 'DD/MM/YYYY');
-    taskCard.toggleClass('bg-warning text-white', now.isSame(taskDueDate, 'day'))
-            .toggleClass('bg-danger text-white', now.isAfter(taskDueDate))
-            .toggleClass('border-light', now.isAfter(taskDueDate));
+  const now = dayjs();
+  const doneDate = dayjs(dueDate);
+  const warningDate = dayjs(dueDate).subtract(3, 'day');
+
+  if (now.isAfter(warningDate) && status != 'done') {
+    taskCard.addClass('bg-warning text-white');
+  }
+  if (now.isAfter(doneDate) && status != 'done') {
+    taskCard.addClass('bg-danger text-white ');
+    cardDeleteBtn.addClass('border-light');
   }
 
   // Append card elements
@@ -82,6 +86,7 @@ function handleAddTask(event) {
   // Add the new task to the taskList, save to localStorage, and render
   taskList.push(task);
   localStorage.setItem('tasks', JSON.stringify(taskList));
+
   renderTaskList();
 
   // Clear input fields
